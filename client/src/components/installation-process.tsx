@@ -1,4 +1,5 @@
 import { useTranslations } from "@/contexts/translations";
+import { getAssetPath } from "@/utils/assetUtils";
 
 export default function InstallationProcess() {
   const { translations } = useTranslations();
@@ -17,7 +18,7 @@ export default function InstallationProcess() {
         
         <div className="w-full flex justify-center mb-20">
           <img 
-            src="/images/Setup.webp" 
+            src={getAssetPath("/images/Setup.webp")} 
             alt="Solar panel installation process" 
             className="w-auto h-auto max-w-full max-h-[500px] object-contain"
           />

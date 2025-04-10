@@ -1,8 +1,10 @@
 import { Link } from "wouter";
 import { useTranslations } from "@/contexts/translations";
+import { getAssetPath } from "@/utils/assetUtils";
 
 export default function Hero() {
   const { translations } = useTranslations();
+  const heroImagePath = getAssetPath("/images/SF-800pro.webp");
   
   return (
     <section id="home" className="h-screen flex items-center text-white bg-hero">
@@ -34,7 +36,7 @@ export default function Hero() {
       <style>
         {`
           .bg-hero {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/SF-800pro.webp');
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('${heroImagePath}');
             background-position: center;
             background-size: cover;
           }

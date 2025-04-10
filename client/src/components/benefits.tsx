@@ -1,5 +1,6 @@
 import { Sun, Euro, Home, Plug } from "lucide-react";
 import { useTranslations } from "@/contexts/translations";
+import { getAssetPath } from "@/utils/assetUtils";
 
 export default function Benefits() {
   const { translations } = useTranslations();
@@ -34,7 +35,7 @@ export default function Benefits() {
           <div className="w-full lg:w-1/2">
             <div className="relative">
               <img 
-                src="/images/12c4e884917f268aa6a972041bf45364.webp" 
+                src={getAssetPath("/images/12c4e884917f268aa6a972041bf45364.webp")} 
                 alt="Solar panels on a balcony in Cyprus" 
                 className="rounded-lg shadow-lg w-full"
               />
