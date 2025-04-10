@@ -5,10 +5,34 @@ import { Toaster } from "@/components/ui/toaster";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import { TranslationsProvider } from "@/contexts/translations";
+import { useState, useEffect } from "react";
+
+// Hash location hook for GitHub Pages
+const useHashLocation = (): [string, (to: string) => void] => {
+  const [hash, setHash] = useState(window.location.hash.replace("#", "") || "/");
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setHash(window.location.hash.replace("#", "") || "/");
+    };
+
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
+
+  const navigate = (to: string) => {
+    window.location.hash = to;
+  };
+
+  return [hash, navigate];
+};
 
 function Router() {
+  // Use hash-based location for GitHub Pages compatibility
+  const [location, navigate] = useHashLocation();
+  
   return (
-    <Switch>
+    <Switch location={location}>
       <Route path="/" component={Home} />
       <Route component={NotFound} />
     </Switch>
