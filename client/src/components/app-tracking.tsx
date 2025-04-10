@@ -1,5 +1,6 @@
 import { Phone, PieChart, BarChart, LineChart } from "lucide-react";
 import { useTranslations } from "@/contexts/translations";
+import { getAssetPath } from "@/utils/assetUtils";
 
 export default function AppTracking() {
   const { translations } = useTranslations();
@@ -77,7 +78,7 @@ export default function AppTracking() {
           <div className="w-full lg:w-1/2">
             <div className="relative">
               <img 
-                src="/images/AppImage.png" 
+                src={getAssetPath("/images/AppImage.png")} 
                 alt="Solar panel tracking mobile app" 
                 className="rounded-lg shadow-xl w-full h-auto object-contain max-h-[700px]"
               />

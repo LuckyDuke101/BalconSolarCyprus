@@ -1,5 +1,6 @@
 import { Cloud, Sun, Sunrise, Sunset, BatteryCharging } from "lucide-react";
 import { useTranslations } from "@/contexts/translations";
+import { getAssetPath } from "@/utils/assetUtils";
 
 export default function NightMode() {
   const { translations } = useTranslations();
@@ -43,7 +44,7 @@ export default function NightMode() {
           <div className="w-full lg:w-3/5">
             <div className="relative">
               <img 
-                src="/images/night-mode.webp" 
+                src={getAssetPath("/images/night-mode.webp")} 
                 alt="Solar panels working in low-light and cloudy conditions" 
                 className="rounded-lg shadow-xl w-full h-auto object-cover max-h-[500px]"
               />

@@ -1,5 +1,6 @@
 import { Check } from "lucide-react";
 import { useTranslations } from "../contexts/translations";
+import { getAssetPath } from "../utils/assetUtils";
 
 interface Product {
   id: number;
@@ -61,7 +62,7 @@ export default function Products() {
             <div key={product.id} className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition flex flex-col h-full">
               <div className="h-56 overflow-hidden">
                 <img 
-                  src={product.image} 
+                  src={getAssetPath(product.image)} 
                   alt={product.name} 
                   className="w-full h-full object-cover hover:scale-105 transition"
                 />
