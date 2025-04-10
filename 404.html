@@ -4,26 +4,11 @@
   <meta charset="utf-8">
   <title>Redirecting...</title>
   <script>
-    // Single Page Apps for GitHub Pages
-    // https://github.com/rafgraph/spa-github-pages
-    // This script takes the current URL and redirects to the index.html with the route as query params
-    
-    // Redirect with the right query parameters
-    const path = window.location.pathname;
-    const pathSegmentsToKeep = 1; // Change this if your repo is nested in user.github.io/reponame/
-    
-    const redirectUrl = 
-      window.location.protocol + '//' + window.location.hostname + 
-      (window.location.port ? ':' + window.location.port : '') +
-      path.split('/').slice(0, pathSegmentsToKeep + 1).join('/') + '/?p=/' +
-      path.split('/').slice(pathSegmentsToKeep + 1).join('/') +
-      (window.location.search ? '&q=' + window.location.search.slice(1) : '') +
-      (window.location.hash || '');
-    
-    window.location.replace(redirectUrl);
+    // Simple redirect to the main page
+    window.location.href = '/BalconSolarCyprus/';
   </script>
 </head>
 <body>
-  <p>Redirecting to the main page...</p>
+  <p>Page not found. Redirecting to home page...</p>
 </body>
 </html> 
