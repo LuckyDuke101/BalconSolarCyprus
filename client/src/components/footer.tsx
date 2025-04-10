@@ -1,15 +1,17 @@
 import { Facebook, Instagram, Twitter, Linkedin, Sun } from "lucide-react";
+import { useTranslations } from "@/contexts/translations";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const { translations } = useTranslations();
   
   const quickLinks = [
-    { name: "Home", href: "#home" },
-    { name: "Products", href: "#products" },
-    { name: "Benefits", href: "#benefits" },
-    { name: "Installation Process", href: "#process" },
-    { name: "FAQ", href: "#faq" },
-    { name: "About Us", href: "#about" }
+    { name: translations.nav.home, href: "#home" },
+    { name: translations.nav.products, href: "#products" },
+    { name: translations.nav.benefits, href: "#benefits" },
+    { name: translations.nav.installation, href: "#process" },
+    { name: translations.nav.faq, href: "#faq" },
+    { name: translations.nav.about, href: "#about" }
   ];
 
   const contactInfo = [
@@ -35,7 +37,7 @@ export default function Footer() {
               <span className="font-poppins font-bold text-xl">SolarCyprus</span>
             </div>
             <p className="text-gray-400 mb-4">
-              Making solar energy accessible to everyone in Cyprus with innovative balcony solutions.
+              {translations.footer.tagline}
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((link, index) => (
@@ -47,7 +49,7 @@ export default function Footer() {
           </div>
           
           <div>
-            <h4 className="font-medium text-lg mb-4">Quick Links</h4>
+            <h4 className="font-medium text-lg mb-4">{translations.footer.quickLinks}</h4>
             <ul className="space-y-2">
               {quickLinks.map((link, index) => (
                 <li key={index}>
@@ -60,7 +62,7 @@ export default function Footer() {
           </div>
           
           <div>
-            <h4 className="font-medium text-lg mb-4">Contact</h4>
+            <h4 className="font-medium text-lg mb-4">{translations.footer.contact}</h4>
             <ul className="space-y-2">
               {contactInfo.map((item, index) => (
                 <li key={index} className="flex items-start">
@@ -72,14 +74,14 @@ export default function Footer() {
           </div>
           
           <div>
-            <h4 className="font-medium text-lg mb-4">Newsletter</h4>
+            <h4 className="font-medium text-lg mb-4">{translations.footer.newsletter}</h4>
             <p className="text-gray-400 mb-4">
-              Subscribe to our newsletter for the latest updates on solar technology and special offers.
+              {translations.footer.subscribeText}
             </p>
             <form className="flex">
               <input 
                 type="email" 
-                placeholder="Your email" 
+                placeholder={translations.footer.emailPlaceholder} 
                 className="bg-gray-800 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
               />
               <button 
@@ -97,12 +99,12 @@ export default function Footer() {
         <div className="border-t border-gray-800 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 mb-4 md:mb-0">
-              &copy; {currentYear} SolarCyprus. All rights reserved.
+              &copy; {currentYear} SolarCyprus. {translations.footer.allRightsReserved}
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-white transition">Privacy Policy</a>
-              <a href="#" className="text-gray-400 hover:text-white transition">Terms of Service</a>
-              <a href="#" className="text-gray-400 hover:text-white transition">Cookie Policy</a>
+              <a href="#" className="text-gray-400 hover:text-white transition">{translations.footer.privacyPolicy}</a>
+              <a href="#" className="text-gray-400 hover:text-white transition">{translations.footer.termsOfService}</a>
+              <a href="#" className="text-gray-400 hover:text-white transition">{translations.footer.cookiePolicy}</a>
             </div>
           </div>
         </div>

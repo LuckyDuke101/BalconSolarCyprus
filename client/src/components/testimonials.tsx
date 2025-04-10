@@ -1,4 +1,5 @@
 import { Star, StarHalf } from "lucide-react";
+import { useTranslations } from "@/contexts/translations";
 
 interface Testimonial {
   rating: number;
@@ -8,26 +9,15 @@ interface Testimonial {
 }
 
 export default function Testimonials() {
-  const testimonials: Testimonial[] = [
-    {
-      rating: 5,
-      text: "I was skeptical about how much power a balcony system could generate, but I've been amazed! My electricity bills are down by 30% since installation. The team was professional and the system looks great on my balcony in Limassol.",
-      name: "Andreas Georgiou",
-      location: "Limassol, Cyprus"
-    },
-    {
-      rating: 5,
-      text: "As a renter, I never thought I could use solar energy. The balcony system was perfect - easy to install and my landlord had no objections. It's been running flawlessly for 8 months now, and I'm saving about €40 per month.",
-      name: "Elena Christodoulou",
-      location: "Nicosia, Cyprus"
-    },
-    {
-      rating: 4.5,
-      text: "The consultation was thorough and honest. They didn't try to oversell me and recommended the perfect system for my small balcony in Paphos. Installation was clean and quick. Very happy with my decision!",
-      name: "Michael Kyriakou",
-      location: "Paphos, Cyprus"
-    }
-  ];
+  const { translations } = useTranslations();
+  
+  // Add ratings to the translated testimonials
+  const testimonials: Testimonial[] = translations.testimonials.items.map((item, index) => ({
+    rating: index === 2 ? 4.5 : 5, // third testimonial gets 4.5 stars, others get 5
+    text: item.text,
+    name: item.name,
+    location: item.location
+  }));
 
   const renderStars = (rating: number) => {
     const stars = [];
@@ -50,10 +40,10 @@ export default function Testimonials() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="font-poppins font-bold text-3xl md:text-4xl mb-4">
-            What Our Customers Say
+            {translations.testimonials.title}
           </h2>
           <p className="text-gray-600 max-w-3xl mx-auto">
-            Hear from Cyprus residents who are already enjoying the benefits of our balcony solar solutions.
+            {translations.testimonials.subtitle}
           </p>
         </div>
         

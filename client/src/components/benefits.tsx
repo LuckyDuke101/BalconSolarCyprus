@@ -1,26 +1,29 @@
 import { Sun, Euro, Home, Plug } from "lucide-react";
+import { useTranslations } from "@/contexts/translations";
 
 export default function Benefits() {
+  const { translations } = useTranslations();
+  
   const benefits = [
     {
       icon: <Sun className="text-blue-600 text-xl" />,
-      title: "Abundant Sunshine",
-      description: "Cyprus enjoys over 340 days of sunshine per year, making it one of the best locations in Europe for solar energy production."
+      title: translations.benefits.abundantSunshine.title,
+      description: translations.benefits.abundantSunshine.description
     },
     {
       icon: <Euro className="text-amber-500 text-xl" />,
-      title: "Significant Savings",
-      description: "With high electricity rates in Cyprus, balcony solar systems typically pay for themselves within 3-5 years, then provide free electricity."
+      title: translations.benefits.significantSavings.title,
+      description: translations.benefits.significantSavings.description
     },
     {
       icon: <Home className="text-green-600 text-xl" />,
-      title: "Ideal for Apartments",
-      description: "Our systems are designed for renters and apartment owners who can't install traditional rooftop solar but still want to benefit from renewable energy."
+      title: translations.benefits.idealForApartments.title,
+      description: translations.benefits.idealForApartments.description
     },
     {
       icon: <Plug className="text-red-500 text-xl" />,
-      title: "Simple Installation",
-      description: "No complex permits required for balcony systems under 2kW in Cyprus. Our solutions can be installed in just a few hours with minimal disruption."
+      title: translations.benefits.simpleInstallation.title,
+      description: translations.benefits.simpleInstallation.description
     }
   ];
 
@@ -31,7 +34,7 @@ export default function Benefits() {
           <div className="w-full lg:w-1/2">
             <div className="relative">
               <img 
-                src="https://images.unsplash.com/photo-1567225557594-88d73e55f2cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" 
+                src="/images/12c4e884917f268aa6a972041bf45364.webp" 
                 alt="Solar panels on a balcony in Cyprus" 
                 className="rounded-lg shadow-lg w-full"
               />
@@ -49,7 +52,7 @@ export default function Benefits() {
           
           <div className="w-full lg:w-1/2">
             <h2 className="font-poppins font-bold text-3xl md:text-4xl mb-6">
-              Why Choose Balcony Solar in Cyprus?
+              {translations.benefits.title}
             </h2>
             
             <div className="space-y-6">

@@ -1,20 +1,26 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Sun } from "lucide-react";
+import { Sun, Menu, X } from "lucide-react";
+import LanguageSwitcher from "./language-switcher";
+import { useTranslations } from "@/contexts/translations";
+import LanguageSelector from './language-selector';
 
 export default function Navbar() {
+  const { translations } = useTranslations();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      if (window.scrollY > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Initial check
-
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -23,12 +29,12 @@ export default function Navbar() {
   };
 
   const navLinks = [
-    { name: "Home", href: "#home" },
-    { name: "Products", href: "#products" },
-    { name: "Benefits", href: "#benefits" },
-    { name: "Installation", href: "#process" },
-    { name: "FAQ", href: "#faq" },
-    { name: "About", href: "#about" }
+    { name: translations.nav.home, href: "#home" },
+    { name: translations.nav.products, href: "#products" },
+    { name: translations.nav.benefits, href: "#benefits" },
+    { name: translations.nav.installation, href: "#process" },
+    { name: translations.nav.faq, href: "#faq" },
+    { name: translations.nav.about, href: "#about" }
   ];
 
   return (
@@ -41,44 +47,51 @@ export default function Navbar() {
         
         {/* Desktop Navigation */}
         <div className="hidden md:flex space-x-8">
-          {navLinks.map((link) => (
+          <div className="flex space-x-6">
+            {navLinks.map((link) => (
+              <a 
+                key={link.name} 
+                href={link.href} 
+                className={`font-medium hover:text-amber-500 transition ${isScrolled ? 'text-gray-700 hover:text-amber-600' : 'text-white hover:text-amber-300'}`}
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
+          
+          <div className="flex items-center space-x-4">
+            <LanguageSelector />
+            
             <a 
-              key={link.name} 
-              href={link.href} 
-              className={`font-medium transition ${isScrolled ? 'text-gray-800 hover:text-blue-600' : 'text-white hover:text-amber-400'}`}
+              href="#appointment" 
+              className="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-full font-medium text-sm transition"
             >
-              {link.name}
+              {translations.nav.bookAppointment}
             </a>
-          ))}
+          </div>
         </div>
         
-        <a 
-          href="#appointment" 
-          className="hidden md:block bg-amber-500 hover:bg-amber-600 text-white px-6 py-2 rounded-full font-medium transition"
-        >
-          Book Appointment
-        </a>
-        
         {/* Mobile menu button */}
-        <button 
-          onClick={toggleMobileMenu}
-          className={`md:hidden focus:outline-none ${isScrolled ? 'text-gray-800' : 'text-white'}`}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
+        <div className="md:hidden flex items-center space-x-4">
+          <LanguageSelector />
+          <button 
+            onClick={toggleMobileMenu}
+            className={`p-2 rounded-md focus:outline-none ${isScrolled ? 'text-gray-700' : 'text-white'}`}
+          >
+            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
       </nav>
       
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white shadow-lg absolute top-full left-0 right-0 p-4 border-t border-gray-200">
+        <div className="md:hidden bg-white text-gray-900 py-4 px-2 shadow-md">
           <div className="flex flex-col space-y-4">
             {navLinks.map((link) => (
               <a 
                 key={link.name}
                 href={link.href} 
-                className="text-gray-800 hover:text-blue-600 py-2 px-4 transition"
+                className="px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 transition"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {link.name}
@@ -86,10 +99,10 @@ export default function Navbar() {
             ))}
             <a 
               href="#appointment" 
-              className="bg-amber-500 hover:bg-amber-600 text-white py-2 px-4 rounded-md font-medium transition text-center"
+              className="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-md font-medium text-center transition"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Book Appointment
+              {translations.nav.bookAppointment}
             </a>
           </div>
         </div>

@@ -8,7 +8,12 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+// GitHub Pages deployment - use relative paths in production
+const isGitHubPages = process.env.GITHUB_PAGES === 'true';
+const base = isGitHubPages ? '/BalconSolarCyprus/' : '/';
+
 export default defineConfig({
+  base: base,
   plugins: [
     react(),
     runtimeErrorOverlay(),
