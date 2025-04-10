@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { apiRequest } from "@/lib/queryClient";
 import { useTranslations } from "@/contexts/translations";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -113,26 +112,33 @@ export default function SolarCalculator() {
     setError(null);
     setResult(null);
 
+    // PVGIS API direct URL
+    const apiUrl = `https://re.jrc.ec.europa.eu/api/v5_3/PVcalc`;
+    
+    // Construct the query parameters
     const params = new URLSearchParams({
-      lat,
-      lon,
+      lat: lat,
+      lon: lon,
       peakpower: peakPower,
-      angle: angle, // Use state value directly
-      aspect: aspect, // Use state value directly
+      loss: '14', // Default loss
+      angle: angle,
+      aspect: aspect,
+      outputformat: 'json',
+      pvtechchoice: 'crystSi'
     });
 
     try {
-      const response = await apiRequest('GET', `/api/pvgis?${params.toString()}`);
+      // Fetch data directly from PVGIS API (requires CORS to be enabled)
+      const corsProxy = 'https://corsproxy.io/?';
+      const response = await fetch(`${corsProxy}${apiUrl}?${params.toString()}`);
       
-      // Check if response is ok before trying to parse JSON
       if (!response.ok) {
         let errorMsg = translations.calculator.error || 'Failed to calculate. Please check inputs and try again.';
         try {
-            const errorData = await response.json();
-            errorMsg = errorData.message || errorMsg;
+          const errorData = await response.json();
+          errorMsg = errorData.message || errorMsg;
         } catch (jsonError) {
-            // If JSON parsing fails, use the status text
-            errorMsg = `API Error: ${response.statusText}`;
+          errorMsg = `API Error: ${response.statusText}`;
         }
         throw new Error(errorMsg);
       }
@@ -152,7 +158,7 @@ export default function SolarCalculator() {
         production: parseFloat(yearlyProduction.toFixed(2)),
         savings: parseFloat(yearlySavings.toFixed(2)),
       });
-    } catch (err: any) { // Catch specific error type if possible
+    } catch (err: any) {
       console.error("Calculation Error:", err);
       // Use error message from thrown error or a default
       setError(err.message || translations.calculator.error || 'Failed to calculate. Please check inputs and try again.');
